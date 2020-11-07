@@ -1,8 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
-function App() {
+import { Button } from "@material-ui/core"
+
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -18,9 +20,10 @@ function App() {
         >
           Learn React
         </a>
+        <Button color="primary">Hello World</Button>
       </header>
     </div>
   );
-}
+};
 
 export default App;
