@@ -1,26 +1,27 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
-import { Button } from "@material-ui/core"
+import RegistrationForm from "./RegistrationForm";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import RegisterSuccess from "./RegisterSuccess";
 
 const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Button color="primary">Hello World</Button>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Link to="/register">Rejestracja</Link>
+            </Route>
+            <Route exact path="/register">
+              <RegistrationForm></RegistrationForm>
+            </Route>
+            <Route exact path="/register-success">
+              <RegisterSuccess></RegisterSuccess>
+            </Route>
+          </Switch>
+        </Router>
       </header>
     </div>
   );
