@@ -1,10 +1,27 @@
-import { Button, FormLabel, Paper, TextField } from "@material-ui/core";
+import {
+  Button,
+  FormLabel,
+  makeStyles,
+  Paper,
+  TextField,
+} from "@material-ui/core";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import "./RegistrationForm.css";
 
+const useStyles = makeStyles((theme) => ({
+  registration: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+}));
+
 const RegistrationForm = () => {
+  const classes = useStyles();
+
   const { handleSubmit, register, errors } = useForm({
     defaultValues: {
       firstName: "",
@@ -14,11 +31,13 @@ const RegistrationForm = () => {
       password: "",
     },
   });
+
   const history = useHistory();
+
   const onSubmit = (values: any) => history.push("/register-success");
 
   return (
-    <Paper>
+    <Paper className={classes.registration}>
       <form
         autoComplete="off"
         className="RegistrationForm-form"
