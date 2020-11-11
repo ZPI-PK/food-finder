@@ -1,4 +1,5 @@
 import { Button, Grid, Link, makeStyles, TextField } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
 import React from "react";
 import { useForm } from "react-hook-form";
 import LoginFormType from "./LoginFormType";
@@ -71,7 +72,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           </Link>
         </Grid>
         <Grid item>
-          <Link href={"/register"} variant="body2">
+          <Link component={RouterLink} to="/register" variant="body2">
             {"Nie posiadasz konta? Zarejestruj się"}
           </Link>
         </Grid>
