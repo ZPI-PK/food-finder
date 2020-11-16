@@ -1,10 +1,7 @@
-import { Button, Grid, Link, makeStyles, TextField } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
+import { TextField, Button, makeStyles } from "@material-ui/core";
 import React from "react";
 import { useForm } from "react-hook-form";
-import LoginFormType from "./LoginFormType";
-
-interface LoginFormProps {}
+import LoginFormType from "../Login/LoginForm/LoginFormType";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -16,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginForm: React.FC<LoginFormProps> = (props) => {
+export const NewDishForm = () => {
   const classes = useStyles();
 
   const { handleSubmit, register } = useForm<LoginFormType>();
@@ -31,30 +28,42 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         variant="outlined"
         margin="normal"
         fullWidth
-        id="email"
-        label="E-mail"
-        name="email"
-        type={"email"}
-        autoComplete="email"
-        inputRef={register({
-          required: true,
-        })}
-        autoFocus
-      />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        fullWidth
-        name="password"
-        label="Hasło"
-        type="password"
-        id="password"
-        autoComplete="current-password"
+        name="name"
+        label="Nazwa"
+        id="name"
+        autoComplete="off"
         inputRef={register({
           required: true,
           minLength: 3,
         })}
       />
+      <TextField
+        variant="outlined"
+        margin="normal"
+        fullWidth
+        id="price"
+        label="Cena"
+        name="price"
+        type="number"
+        InputProps={{ inputProps: { step: 0.01 } }}
+        autoComplete="off"
+        inputRef={register({
+          required: true,
+        })}
+      />
+      <TextField
+        variant="outlined"
+        margin="normal"
+        fullWidth
+        id="description"
+        label="Opis"
+        name="description"
+        autoComplete="off"
+        inputRef={register({
+          required: true,
+        })}
+      />
+
       <Button
         type="submit"
         fullWidth
@@ -63,17 +72,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         className={classes.submit}
         onClick={handleSubmit(onSubmit)}
       >
-        Zaloguj się
+        Dodaj
       </Button>
-      <Grid container>
-        <Grid item>
-          <Link component={RouterLink} to="/register" variant="body2">
-            {"Nie posiadasz konta? Zarejestruj się"}
-          </Link>
-        </Grid>
-      </Grid>
     </form>
   );
 };
-
-export default LoginForm;

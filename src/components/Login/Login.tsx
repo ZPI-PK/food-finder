@@ -26,7 +26,7 @@ const Login: React.FC<LoginProps> = (props) => {
       <div className={classes.login}>
         <Avatar className={classes.avatar}></Avatar>
         <Typography component="h1" variant="h5">
-          Zaloguj się
+          Logowanie
         </Typography>
         <LoginForm />
       </div>
