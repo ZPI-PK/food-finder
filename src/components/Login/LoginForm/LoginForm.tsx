@@ -3,8 +3,11 @@ import { Link as RouterLink } from "react-router-dom";
 import React from "react";
 import { useForm } from "react-hook-form";
 import LoginFormType from "./LoginFormType";
+import LoginRequest from "../../../shared/types/auth/LoginRequest";
 
-interface LoginFormProps {}
+interface LoginFormProps {
+  onAuth: (loginRequest: LoginRequest) => void;
+}
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -17,12 +20,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
+  const { onAuth } = props;
+
   const classes = useStyles();
 
   const { handleSubmit, register } = useForm<LoginFormType>();
 
   const onSubmit = (formData: LoginFormType) => {
-    console.log(formData);
+    const data: LoginRequest = {
+      usernameOrEmail: formData.email,
+      password: formData.password,
+    };
+    onAuth(data);
   };
 
   return (
@@ -32,9 +41,9 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         margin="normal"
         fullWidth
         id="email"
-        label="E-mail"
+        label="E-mail/UserName"
         name="email"
-        type={"email"}
+        type={"text"}
         autoComplete="email"
         inputRef={register({
           required: true,
