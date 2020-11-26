@@ -14,7 +14,6 @@ import Dashboard from "../Dashboard/Dashboard";
 
 interface AppProps {
   authenticated: boolean;
-  // userRole: UserRole | null;
   onAuthCheck: () => void;
 }
 
@@ -47,7 +46,6 @@ const App: React.FC<AppProps> = (props) => {
 const mapStateToProps = (state: StoreState) => {
   return {
     authenticated: state.authStore.accessToken !== null,
-    // userRole: state.userStore.role,
   };
 };
 
