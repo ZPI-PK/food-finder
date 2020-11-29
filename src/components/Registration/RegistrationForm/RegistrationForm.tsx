@@ -1,9 +1,12 @@
 import { Button, Link, makeStyles, TextField } from "@material-ui/core";
-import React from "react";
+import React, { FC } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
-import RegistrationFormType from "./RegistrationFormType";
+import RegisterRequest from "../../../shared/types/register/RegisterRequest";
+
+interface RegisterFormProps {
+  onRegister: (request: RegisterRequest) => void;
+}
 
 const useStyles = makeStyles((theme) => ({
   registration: {
@@ -21,32 +24,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RegistrationForm = () => {
+const RegistrationForm: FC<RegisterFormProps> = ({ onRegister }) => {
   const classes = useStyles();
 
   const { handleSubmit, register, errors } = useForm({
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      name: "",
+      username: "",
       login: "",
       email: "",
       password: "",
     },
   });
 
-  const history = useHistory();
-
-  const onSubmit = (values: RegistrationFormType) =>
-    history.push("/register-success");
+  const onSubmit = (values: RegisterRequest) => onRegister(values);
 
   return (
     <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
       <TextField
-        id="firstName"
-        name="firstName"
+        id="name"
+        name="name"
         inputRef={register({ required: "Wymagane" })}
-        error={!!errors.firstName}
-        helperText={errors.firstName?.message}
+        error={!!errors.name}
+        helperText={errors.name?.message}
         label="Imię"
         autoComplete="given-name"
         variant="outlined"
@@ -55,12 +55,12 @@ const RegistrationForm = () => {
         autoFocus
       />
       <TextField
-        id="lastName"
-        name="lastName"
+        id="username"
+        name="username"
         inputRef={register({ required: "Wymagane" })}
-        error={!!errors.lastName}
-        helperText={errors.lastName?.message}
-        label="Nazwisko"
+        error={!!errors.username}
+        helperText={errors.username?.message}
+        label="Nazwa użytkownika"
         autoComplete="family-name"
         variant="outlined"
         margin="normal"
