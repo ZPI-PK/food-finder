@@ -11,6 +11,7 @@ import RegisterSuccess from "../Registration/RegisterSuccess";
 import Registration from "../Registration/Registration";
 import Logout from "../Logout/Logout";
 import Dashboard from "../Dashboard/Dashboard";
+import MainAppBar from "../MainAppBar/MainAppBar";
 
 interface AppProps {
   authenticated: boolean;
@@ -25,21 +26,24 @@ const App: React.FC<AppProps> = (props) => {
   }, [onAuthCheck]);
 
   return (
-    <Container component="main" maxWidth="xs">
-      {!authenticated ? (
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/register" component={Registration} />
-          <Route exact path="/register-success" component={RegisterSuccess} />
-          <Route exact path="/add-dish" component={NewDish} />
-        </Switch>
-      ) : (
-        <Switch>
-          <Route exact path="/logout" component={Logout} />
-          <Route path="/" component={Dashboard} />
-        </Switch>
-      )}
-    </Container>
+    <div>
+      <MainAppBar />
+      <Container component="main" maxWidth="xs">
+        {!authenticated ? (
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/register" component={Registration} />
+            <Route exact path="/register-success" component={RegisterSuccess} />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/logout" component={Logout} />
+            <Route path="/" component={Dashboard} />
+            <Route exact path="/add-dish" component={NewDish} />
+          </Switch>
+        )}
+      </Container>
+    </div>
   );
 };
 
