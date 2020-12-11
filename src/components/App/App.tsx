@@ -11,7 +11,7 @@ import RegisterSuccess from "../Registration/RegisterSuccess";
 import Registration from "../Registration/Registration";
 import Logout from "../Logout/Logout";
 import Dashboard from "../Dashboard/Dashboard";
-import MainAppBar from "../MainAppBar/MainAppBar";
+import Layout from "../Layout/Layout";
 
 interface AppProps {
   authenticated: boolean;
@@ -27,22 +27,23 @@ const App: React.FC<AppProps> = (props) => {
 
   return (
     <div>
-      <MainAppBar />
-      <Container component="main" maxWidth="xs">
-        {!authenticated ? (
+      {!authenticated ? (
+        <Container component="main" maxWidth="xs">
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/register" component={Registration} />
             <Route exact path="/register-success" component={RegisterSuccess} />
           </Switch>
-        ) : (
+        </Container>
+      ) : (
+        <Layout>
           <Switch>
             <Route exact path="/logout" component={Logout} />
             <Route path="/" component={Dashboard} />
             <Route exact path="/add-dish" component={NewDish} />
           </Switch>
-        )}
-      </Container>
+        </Layout>
+      )}
     </div>
   );
 };
