@@ -8,8 +8,8 @@ import {
   ListItem,
   Typography,
 } from "@material-ui/core";
-import React, { FC } from "react";
 import Add from "@material-ui/icons/Add";
+import React, { FC } from "react";
 
 interface DishListProps {
   dishes: any[];
