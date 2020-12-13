@@ -1,8 +1,9 @@
 import Dish from "../../shared/types/dish/Dish";
+import { DishGroup } from "../../shared/types/dish/DishGroup";
 import * as actionTypes from "../actionTypes";
 
 export interface CartState {
-  dishes: Dish[];
+  dishes: DishGroup[];
 }
 
 export interface AddDishToCartAction {
