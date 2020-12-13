@@ -1,11 +1,12 @@
 import { Container, Grid, Paper, makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import { connect } from "react-redux";
-import React from "react";
+import React, { useEffect } from "react";
 import Dish from "../../shared/types/dish/Dish";
 import { StoreState, StoreDispatch } from "../../shared/types/store";
 import { addDishToCart } from "../../store";
 import DishList from "../DishList/DishList";
+import { getDishes } from "../../store/dish/dish.action";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,11 +27,13 @@ const useStyles = makeStyles((theme) => ({
 export type DashboardProps = {
   dishes: any[];
   addDishClicked: (dish: Dish) => void;
+  loadDishes: () => void;
 };
 
-const Dashboard = ({ dishes, addDishClicked }: DashboardProps) => {
+const Dashboard = ({ dishes, addDishClicked, loadDishes }: DashboardProps) => {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  useEffect(loadDishes, [loadDishes]);
 
   return (
     <Container maxWidth="lg" className={classes.container}>
@@ -55,21 +58,14 @@ const Dashboard = ({ dishes, addDishClicked }: DashboardProps) => {
 
 const mapStateToProps = (state: StoreState) => {
   return {
-    dishes: [
-      {
-        id: 1,
-        name: "Pizza",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        price: 100,
-      },
-    ],
+    dishes: state.dishStore.dishes,
   };
 };
 
 const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
     addDishClicked: (dish: Dish) => dispatch(addDishToCart(dish)),
+    loadDishes: () => dispatch(getDishes()),
   };
 };
 
