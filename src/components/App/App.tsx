@@ -12,6 +12,7 @@ import Registration from "../Registration/Registration";
 import Logout from "../Logout/Logout";
 import Dashboard from "../Dashboard/Dashboard";
 import Layout from "../Layout/Layout";
+import Cart from "../Cart/Cart";
 
 interface AppProps {
   authenticated: boolean;
@@ -39,8 +40,9 @@ const App: React.FC<AppProps> = (props) => {
         <Layout>
           <Switch>
             <Route exact path="/logout" component={Logout} />
-            <Route path="/" component={Dashboard} />
+            <Route exact path="/" component={Dashboard} />
             <Route exact path="/add-dish" component={NewDish} />
+            <Route exact path="/cart" component={Cart} />
           </Switch>
         </Layout>
       )}

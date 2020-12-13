@@ -17,6 +17,8 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router";
 import Copyright from "../UI/Copyright/Copyright";
+import { useSelector } from "react-redux";
+import { getCartTotal } from "../../store/cart/cart.reducer";
 
 const drawerWidth = 240;
 
@@ -105,6 +107,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   const classes = useStyles();
   const history = useHistory();
   const [open, setOpen] = React.useState(true);
+  const cartTotal = useSelector(getCartTotal);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -166,17 +169,17 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
           </IconButton>
         </div>
         <Divider />
-        <ListItem button>
+        <ListItem button onClick={() => history.push("/")}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => history.push("/cart")}>
           <ListItemIcon>
             <ShoppingCartIcon />
           </ListItemIcon>
-          <ListItemText primary="Orders" />
+          <ListItemText primary="Cart" secondary={`${cartTotal} PLN`} />
         </ListItem>
         <Divider />
       </Drawer>
