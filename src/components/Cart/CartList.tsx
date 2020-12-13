@@ -28,7 +28,7 @@ const CartList: FC<CartListProps> = ({
     <List>
       {dishes.map((dish) => (
         <ListItem key={dish.id}>
-          <Card>
+          <Card style={{ flexGrow: 1 }}>
             <CardHeader
               title={
                 dish.count === 1 ? dish.name : `${dish.count} x ${dish.name}`

@@ -22,7 +22,7 @@ const DishList: FC<DishListProps> = ({ dishes, addDishClicked }) => {
     <List>
       {dishes.map((dish) => (
         <ListItem key={dish.id}>
-          <Card>
+          <Card style={{ flexGrow: 1 }}>
             <CardHeader title={dish.name}></CardHeader>
             <CardContent>
               {dish.description}
