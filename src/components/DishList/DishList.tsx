@@ -14,7 +14,11 @@ const DishList: FC<DishListProps> = ({ dishes, addDishClicked }) => {
   return (
     <List className={styles.list}>
       {dishes.map((dish) => (
-        <DishItem dish={dish} addDishClicked={addDishClicked}></DishItem>
+        <DishItem
+          key={dish.id}
+          dish={dish}
+          addDishClicked={addDishClicked}
+        ></DishItem>
       ))}
     </List>
   );

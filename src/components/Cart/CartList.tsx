@@ -20,6 +20,7 @@ const CartList: FC<CartListProps> = ({
     <List className={styles.list}>
       {dishes.map((dish) => (
         <CartItem
+          key={dish.id}
           addDishClicked={addDishClicked}
           removeDishClicked={removeDishClicked}
           dish={dish}

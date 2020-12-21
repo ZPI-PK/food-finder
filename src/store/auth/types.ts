@@ -4,6 +4,7 @@ export interface AuthState {
   accessToken: string | null;
   error: string | null;
   authLoading: boolean;
+  isAdmin: boolean;
 }
 
 export interface AuthStartAction {
