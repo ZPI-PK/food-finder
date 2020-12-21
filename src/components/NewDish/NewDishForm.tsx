@@ -1,6 +1,9 @@
 import { TextField, Button, makeStyles, Container } from "@material-ui/core";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import AddDishRequest from "../../shared/types/dish/AddDishRequest";
+import { addDish } from "../../store/dish/dish.action";
 import LoginFormType from "../Login/LoginForm/LoginFormType";
 
 const useStyles = makeStyles((theme) => ({
@@ -17,9 +20,9 @@ export const NewDishForm = () => {
   const classes = useStyles();
 
   const { handleSubmit, register } = useForm<LoginFormType>();
-
-  const onSubmit = (formData: LoginFormType) => {
-    console.log(formData);
+  const dispatch = useDispatch();
+  const onSubmit = (formData: AddDishRequest) => {
+    dispatch(addDish(formData));
   };
 
   return (
