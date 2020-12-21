@@ -1,17 +1,8 @@
-import {
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  IconButton,
-  List,
-  ListItem,
-  Typography,
-} from "@material-ui/core";
-import { Remove } from "@material-ui/icons";
-import Add from "@material-ui/icons/Add";
+import { List } from "@material-ui/core";
 import React, { FC } from "react";
+import useListStyles from "../../shared/styles/ListStyles";
 import { DishGroup } from "../../shared/types/dish/DishGroup";
+import CartItem from "./CartItem";
 
 interface CartListProps {
   dishes: any[];
@@ -24,36 +15,15 @@ const CartList: FC<CartListProps> = ({
   addDishClicked,
   removeDishClicked,
 }) => {
+  const styles = useListStyles();
   return (
-    <List>
+    <List className={styles.list}>
       {dishes.map((dish) => (
-        <ListItem key={dish.id}>
-          <Card style={{ flexGrow: 1 }}>
-            <CardHeader
-              title={
-                dish.count === 1 ? dish.name : `${dish.count} x ${dish.name}`
-              }
-            ></CardHeader>
-            <CardContent>
-              {dish.description}
-              <Typography
-                component="h5"
-                variant="h5"
-                style={{ paddingTop: "1em" }}
-              >
-                {dish.price * dish.count} PLN
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <IconButton onClick={() => addDishClicked(dish)}>
-                <Add></Add>
-              </IconButton>
-              <IconButton onClick={() => removeDishClicked(dish)}>
-                <Remove></Remove>
-              </IconButton>
-            </CardActions>
-          </Card>
-        </ListItem>
+        <CartItem
+          addDishClicked={addDishClicked}
+          removeDishClicked={removeDishClicked}
+          dish={dish}
+        ></CartItem>
       ))}
     </List>
   );
