@@ -7,9 +7,16 @@ export interface DishState {
   dishes: Dish[];
 }
 
-export interface AddDish {
-  type: typeof actionTypes.ADD_DISH;
+export interface AddDishStart {
+  type: typeof actionTypes.ADD_DISH_START;
   dish: AddDishRequest;
+}
+export interface AddDishSuccess {
+  type: typeof actionTypes.ADD_DISH_SUCCESS;
+  dish: Dish;
+}
+export interface AddDishFailure {
+  type: typeof actionTypes.ADD_DISH_FAILURE;
 }
 
 export interface GetDishesStart {
@@ -24,7 +31,9 @@ export interface GetDishesFailure {
 }
 
 export type DishActionTypes =
-  | AddDish
+  | AddDishStart
+  | AddDishSuccess
+  | AddDishFailure
   | GetDishesStart
   | GetDishesSuccess
   | GetDishesFailure;

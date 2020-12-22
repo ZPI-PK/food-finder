@@ -14,6 +14,8 @@ const reducer = (state = initialState, action: DishActionTypes): DishState => {
       return { ...state, dishes: action.dishes, isLoading: false };
     case actionTypes.GET_DISHES_FAILURE:
       return { ...state, isLoading: false };
+    case actionTypes.ADD_DISH_SUCCESS:
+      return { ...state, dishes: state.dishes.concat(action.dish) };
     default:
       return state;
   }

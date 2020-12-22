@@ -19,6 +19,8 @@ import { useHistory } from "react-router";
 import Copyright from "../UI/Copyright/Copyright";
 import { useSelector } from "react-redux";
 import { getCartTotal } from "../../store/cart/cart.reducer";
+import { getIsAdmin } from "../../store/auth/auth.reducer";
+import { Add } from "@material-ui/icons";
 
 const drawerWidth = 240;
 
@@ -99,6 +101,9 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  drawerItemHidden: {
+    display: "none",
+  },
 }));
 
 interface LayoutProps {}
@@ -108,6 +113,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   const history = useHistory();
   const [open, setOpen] = React.useState(true);
   const cartTotal = useSelector(getCartTotal);
+  const isAdmin = useSelector(getIsAdmin);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -175,11 +181,25 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
-        <ListItem button onClick={() => history.push("/cart")}>
+        <ListItem
+          button
+          onClick={() => history.push("/cart")}
+          className={clsx(isAdmin && classes.drawerItemHidden)}
+        >
           <ListItemIcon>
             <ShoppingCartIcon />
           </ListItemIcon>
           <ListItemText primary="Cart" secondary={`${cartTotal} PLN`} />
+        </ListItem>
+        <ListItem
+          button
+          onClick={() => history.push("/add-dish")}
+          className={clsx(!isAdmin && classes.drawerItemHidden)}
+        >
+          <ListItemIcon>
+            <Add />
+          </ListItemIcon>
+          <ListItemText primary="New dish" />
         </ListItem>
         <Divider />
       </Drawer>

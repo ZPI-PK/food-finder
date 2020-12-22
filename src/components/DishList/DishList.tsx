@@ -1,16 +1,8 @@
-import {
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  IconButton,
-  List,
-  ListItem,
-  Typography,
-} from "@material-ui/core";
-import Add from "@material-ui/icons/Add";
+import { List } from "@material-ui/core";
 import React, { FC } from "react";
+import useListStyles from "../../shared/styles/ListStyles";
 import Dish from "../../shared/types/dish/Dish";
+import DishItem from "./DishItem";
 
 interface DishListProps {
   dishes: any[];
@@ -18,29 +10,15 @@ interface DishListProps {
 }
 
 const DishList: FC<DishListProps> = ({ dishes, addDishClicked }) => {
+  const styles = useListStyles();
   return (
-    <List>
+    <List className={styles.list}>
       {dishes.map((dish) => (
-        <ListItem key={dish.id}>
-          <Card style={{ flexGrow: 1 }}>
-            <CardHeader title={dish.name}></CardHeader>
-            <CardContent>
-              {dish.description}
-              <Typography
-                component="h5"
-                variant="h5"
-                style={{ paddingTop: "1em" }}
-              >
-                {dish.price} PLN
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <IconButton onClick={() => addDishClicked(dish)}>
-                <Add></Add>
-              </IconButton>
-            </CardActions>
-          </Card>
-        </ListItem>
+        <DishItem
+          key={dish.id}
+          dish={dish}
+          addDishClicked={addDishClicked}
+        ></DishItem>
       ))}
     </List>
   );

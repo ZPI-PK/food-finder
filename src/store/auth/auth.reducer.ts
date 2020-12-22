@@ -1,3 +1,4 @@
+import { StoreState } from "../../shared/types/store";
 import * as actionTypes from "../actionTypes";
 import {
   AuthActionTypes,
@@ -12,7 +13,10 @@ const initialState: AuthState = {
   accessToken: null,
   error: null,
   authLoading: false,
+  isAdmin: true,
 };
+
+export const getIsAdmin = (state: StoreState) => state.authStore.isAdmin;
 
 const authStart = (state: AuthState, action: AuthStartAction): AuthState => {
   return {

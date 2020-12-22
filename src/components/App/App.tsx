@@ -1,7 +1,7 @@
 import { Container } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import * as action from "../../store";
 import { StoreDispatch, StoreState } from "../../shared/types/store";
@@ -10,9 +10,11 @@ import { NewDish } from "../NewDish/NewDish";
 import RegisterSuccess from "../Registration/RegisterSuccess";
 import Registration from "../Registration/Registration";
 import Logout from "../Logout/Logout";
-import Dashboard from "../Dashboard/Dashboard";
+import AdminDashboard from "../Dashboard/AdminDashboard";
 import Layout from "../Layout/Layout";
 import Cart from "../Cart/Cart";
+import { getIsAdmin } from "../../store/auth/auth.reducer";
+import UserDashboard from "../Dashboard/UserDashboard";
 
 interface AppProps {
   authenticated: boolean;
@@ -21,7 +23,7 @@ interface AppProps {
 
 const App: React.FC<AppProps> = (props) => {
   const { authenticated, onAuthCheck } = props;
-
+  const isAdmin = useSelector(getIsAdmin);
   useEffect(() => {
     onAuthCheck();
   }, [onAuthCheck]);
@@ -36,12 +38,19 @@ const App: React.FC<AppProps> = (props) => {
             <Route exact path="/register-success" component={RegisterSuccess} />
           </Switch>
         </Container>
+      ) : isAdmin ? (
+        <Layout>
+          <Switch>
+            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/" component={AdminDashboard} />
+            <Route exact path="/add-dish" component={NewDish} />
+          </Switch>
+        </Layout>
       ) : (
         <Layout>
           <Switch>
             <Route exact path="/logout" component={Logout} />
-            <Route exact path="/" component={Dashboard} />
-            <Route exact path="/add-dish" component={NewDish} />
+            <Route exact path="/" component={UserDashboard} />
             <Route exact path="/cart" component={Cart} />
           </Switch>
         </Layout>

@@ -1,4 +1,4 @@
-import { Container, Grid, Paper, makeStyles } from "@material-ui/core";
+import { Container, Grid, Paper } from "@material-ui/core";
 import clsx from "clsx";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
@@ -7,31 +7,20 @@ import { StoreState, StoreDispatch } from "../../shared/types/store";
 import { addDishToCart } from "../../store";
 import DishList from "../DishList/DishList";
 import { getDishes } from "../../store/dish/dish.action";
+import { useDashboardStyles } from "../../shared/styles/DashboardStyles";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-  },
-  fixedHeight: {
-    height: 240,
-  },
-}));
-
-export type DashboardProps = {
+interface DashboardProps {
   dishes: any[];
   addDishClicked: (dish: Dish) => void;
   loadDishes: () => void;
-};
+}
 
-const Dashboard = ({ dishes, addDishClicked, loadDishes }: DashboardProps) => {
-  const classes = useStyles();
+const AdminDashboard = ({
+  dishes,
+  addDishClicked,
+  loadDishes,
+}: DashboardProps) => {
+  const classes = useDashboardStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   useEffect(loadDishes, [loadDishes]);
 
@@ -69,4 +58,4 @@ const mapDispatchToProps = (dispatch: StoreDispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminDashboard);
