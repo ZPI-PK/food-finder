@@ -14,6 +14,7 @@ export interface AuthStartAction {
 export interface AuthSuccessAction {
   type: typeof actionTypes.AUTH_SUCCESS;
   accessToken: string;
+  isAdmin: boolean;
 }
 
 export interface AuthFailureAction {
