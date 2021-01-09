@@ -1,8 +1,10 @@
 import Dish from "../../shared/types/dish/Dish";
+import { Order } from "../../shared/types/order/Order";
 import * as actionTypes from "../actionTypes";
 
 export interface OrderState {
   isPostingOrder: boolean;
+  orders: Order[];
 }
 
 export interface PostOrderStartAction {
@@ -18,7 +20,21 @@ export interface PostOrderSuccessAction {
   type: typeof actionTypes.POST_ORDER_SUCCSS;
 }
 
+export interface GetOrdersStart {
+  type: typeof actionTypes.GET_ORDERS_START;
+}
+export interface GetOrdersSuccess {
+  type: typeof actionTypes.GET_ORDERS_SUCCESS;
+  orders: Order[];
+}
+export interface GetOrdersFailure {
+  type: typeof actionTypes.GET_ORDERS_FAILURE;
+}
+
 export type OrderActionTypes =
   | PostOrderStartAction
   | PostOrderSuccessAction
-  | PostOrderFailureAction;
+  | PostOrderFailureAction
+  | GetOrdersFailure
+  | GetOrdersStart
+  | GetOrdersSuccess;

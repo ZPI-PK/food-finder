@@ -3,6 +3,53 @@ import { OrderActionTypes, OrderState } from "./types";
 
 const initialState: OrderState = {
   isPostingOrder: false,
+  orders: [
+    {
+      id: 1,
+      city: "asd",
+      postalCode: "asd",
+      street: "asd",
+      buildingNumber: "asd",
+      dishes: [
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+      ],
+      userId: 2,
+      price: 52,
+    },
+    {
+      id: 2,
+      city: "asd",
+      postalCode: "asd",
+      street: "asd",
+      buildingNumber: "asd",
+      dishes: [
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+      ],
+      userId: 2,
+      price: 52,
+    },
+    {
+      id: 3,
+      city: "asd",
+      postalCode: "asd",
+      street: "asd",
+      buildingNumber: "asd",
+      dishes: [
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+        { id: 1, name: "rosol", description: "super rosol", price: 13 },
+      ],
+      userId: 2,
+      price: 52,
+    },
+  ],
 };
 
 const reducer = (

@@ -20,7 +20,7 @@ import Copyright from "../UI/Copyright/Copyright";
 import { useSelector } from "react-redux";
 import { getCartTotal } from "../../store/cart/cart.reducer";
 import { getIsAdmin } from "../../store/auth/auth.reducer";
-import { Add } from "@material-ui/icons";
+import { Add, List } from "@material-ui/icons";
 
 const drawerWidth = 240;
 
@@ -200,6 +200,12 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
             <Add />
           </ListItemIcon>
           <ListItemText primary="New dish" />
+        </ListItem>
+        <ListItem button onClick={() => history.push("/orders")}>
+          <ListItemIcon>
+            <List />
+          </ListItemIcon>
+          <ListItemText primary="Orders" />
         </ListItem>
         <Divider />
       </Drawer>

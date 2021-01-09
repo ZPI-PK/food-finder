@@ -15,6 +15,8 @@ import Layout from "../Layout/Layout";
 import Cart from "../Cart/Cart";
 import { getIsAdmin } from "../../store/auth/auth.reducer";
 import UserDashboard from "../Dashboard/UserDashboard";
+import AdminOrders from "../Order/AdminOrders";
+import UserOrders from "../Order/UserOrders";
 
 interface AppProps {
   authenticated: boolean;
@@ -44,6 +46,7 @@ const App: React.FC<AppProps> = (props) => {
             <Route exact path="/logout" component={Logout} />
             <Route exact path="/" component={AdminDashboard} />
             <Route exact path="/add-dish" component={NewDish} />
+            <Route exact path="/orders" component={AdminOrders} />
           </Switch>
         </Layout>
       ) : (
@@ -52,6 +55,7 @@ const App: React.FC<AppProps> = (props) => {
             <Route exact path="/logout" component={Logout} />
             <Route exact path="/" component={UserDashboard} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/orders" component={UserOrders} />
           </Switch>
         </Layout>
       )}
