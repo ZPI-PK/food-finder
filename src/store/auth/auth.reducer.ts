@@ -8,6 +8,7 @@ import {
   AuthState,
   AuthSuccessAction,
 } from "./types";
+import jwt_decode from "jwt-decode";
 
 const initialState: AuthState = {
   accessToken: null,
@@ -17,6 +18,10 @@ const initialState: AuthState = {
 };
 
 export const getIsAdmin = (state: StoreState) => state.authStore.isAdmin;
+export const getUserId = (state: StoreState) =>
+  state.authStore.accessToken != null
+    ? Number(jwt_decode<{ sub: string }>(state.authStore.accessToken).sub)
+    : 0;
 
 const authStart = (state: AuthState, action: AuthStartAction): AuthState => {
   return {
