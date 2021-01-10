@@ -8,4 +8,5 @@ export default interface PostOrderRequest {
   buildingNumber: string;
   postalCode: string;
   dishes: Dish[];
+  status: "CREATED";
 }

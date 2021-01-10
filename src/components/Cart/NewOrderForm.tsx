@@ -27,7 +27,13 @@ export const NewOrderForm = () => {
   const price = useSelector(getCartTotal);
   const dispatch = useDispatch();
   const onSubmit = (formData: PostOrderRequest) => {
-    const request = { ...formData, dishes, userId, price };
+    const request: PostOrderRequest = {
+      ...formData,
+      dishes,
+      userId,
+      price,
+      status: "CREATED",
+    };
     dispatch(postOrder(request));
   };
 

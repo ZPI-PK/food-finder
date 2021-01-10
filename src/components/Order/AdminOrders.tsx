@@ -1,40 +1,47 @@
 import { Container } from "@material-ui/core";
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useDashboardStyles } from "../../shared/styles/DashboardStyles";
 import Dish from "../../shared/types/dish/Dish";
-import { Order } from "../../shared/types/order/Order";
+import { OrderStatus } from "../../shared/types/order/Order";
 import { StoreState, StoreDispatch } from "../../shared/types/store";
 import { addDishToCart } from "../../store";
-import { getOrdersAdmin } from "../../store/order/order.action";
+import {
+  changeOrderStatus,
+  getOrdersAdmin,
+} from "../../store/order/order.action";
+import { getOrders } from "../../store/order/order.reducer";
 import OrderList from "./OrderList";
 
 interface OrdersProps {
-  orders: Order[];
   loadOrders: () => void;
+  changeOrderStatus: (orderId: number, status: OrderStatus) => void;
 }
 
-const AdminOrders = ({ orders, loadOrders }: OrdersProps) => {
+const AdminOrders = ({ loadOrders, changeOrderStatus }: OrdersProps) => {
   const classes = useDashboardStyles();
   useEffect(loadOrders, [loadOrders]);
-
+  const orders = useSelector(getOrders);
   return (
     <Container maxWidth="lg" className={classes.container}>
-      <OrderList orders={orders}></OrderList>
+      <OrderList
+        changeOrderStatus={changeOrderStatus}
+        orders={orders}
+      ></OrderList>
     </Container>
   );
 };
 
 const mapStateToProps = (state: StoreState) => {
-  return {
-    orders: state.orderStore.orders,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
     addDishClicked: (dish: Dish) => dispatch(addDishToCart(dish)),
     loadOrders: () => dispatch(getOrdersAdmin()),
+    changeOrderStatus: (orderId: number, status: OrderStatus) =>
+      dispatch(changeOrderStatus(orderId, status)),
   };
 };
 

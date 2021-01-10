@@ -1,3 +1,4 @@
+import { StoreState } from "../../shared/types/store";
 import * as actionTypes from "../actionTypes";
 import { OrderActionTypes, OrderState } from "./types";
 
@@ -18,6 +19,7 @@ const initialState: OrderState = {
       ],
       userId: 2,
       price: 52,
+      status: "CREATED",
     },
     {
       id: 2,
@@ -33,6 +35,7 @@ const initialState: OrderState = {
       ],
       userId: 2,
       price: 52,
+      status: "DONE",
     },
     {
       id: 3,
@@ -48,9 +51,13 @@ const initialState: OrderState = {
       ],
       userId: 2,
       price: 52,
+      status: "DURING",
     },
   ],
 };
+
+export const getOrders = (state: StoreState) =>
+  state.orderStore.orders.sort((a, b) => b.id - a.id);
 
 const reducer = (
   state = initialState,
@@ -63,6 +70,8 @@ const reducer = (
       return { ...state, isPostingOrder: false };
     case actionTypes.POST_ORDER_SUCCSS:
       return { ...state, isPostingOrder: false };
+    case actionTypes.GET_ORDERS_SUCCESS:
+      return { ...state, orders: action.orders };
     default:
       return state;
   }

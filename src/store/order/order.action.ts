@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import axios from "../../shared/config/axios";
 import Dish from "../../shared/types/dish/Dish";
-import { Order } from "../../shared/types/order/Order";
+import { Order, OrderStatus } from "../../shared/types/order/Order";
 import PostOrderRequest from "../../shared/types/order/PostOrderRequest";
 import { StoreDispatch } from "../../shared/types/store";
 import * as actionTypes from "../actionTypes";
@@ -84,6 +84,22 @@ export const getOrdersUser = (userId: number): any => (
 
   return axios
     .get(`api/order/user/all?id=${userId}`)
+    .then((res: AxiosResponse<Order[]>) => {
+      dispatch(getOrdersSuccess(res.data));
+    })
+    .catch(() => {
+      dispatch(getOrdersFailure());
+    });
+};
+
+export const changeOrderStatus = (
+  orderId: number,
+  status: OrderStatus
+): any => (dispatch: StoreDispatch): any => {
+  dispatch(getOrdersStart());
+
+  return axios
+    .get(`api/order/status?id=${orderId}&status=${status}`)
     .then((res: AxiosResponse<Order[]>) => {
       dispatch(getOrdersSuccess(res.data));
     })

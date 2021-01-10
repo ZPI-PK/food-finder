@@ -1,5 +1,7 @@
 import Dish from "../dish/Dish";
 
+export type OrderStatus = "CREATED" | "DURING" | "DONE";
+
 export interface Order {
   id: number;
   price: number;
@@ -9,4 +11,5 @@ export interface Order {
   buildingNumber: string;
   postalCode: string;
   dishes: Dish[];
+  status: OrderStatus;
 }

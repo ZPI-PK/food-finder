@@ -17,7 +17,7 @@ const initialState: AuthState = {
   isAdmin: false,
 };
 
-export const getIsAdmin = (state: StoreState) => state.authStore.isAdmin;
+export const getIsAdmin = (state: StoreState) => getUserId(state) === 1;
 export const getUserId = (state: StoreState) =>
   state.authStore.accessToken != null
     ? Number(jwt_decode<{ sub: string }>(state.authStore.accessToken).sub)

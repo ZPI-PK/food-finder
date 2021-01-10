@@ -8,29 +8,31 @@ import { StoreState, StoreDispatch } from "../../shared/types/store";
 import { addDishToCart } from "../../store";
 import { getUserId } from "../../store/auth/auth.reducer";
 import { getOrdersUser } from "../../store/order/order.action";
+import { getOrders } from "../../store/order/order.reducer";
 import OrderList from "./OrderList";
 
 interface OrdersProps {
-  orders: Order[];
   loadOrders: (userId: number) => void;
 }
 
-const UserOrders = ({ orders, loadOrders }: OrdersProps) => {
+const UserOrders = ({ loadOrders }: OrdersProps) => {
   const classes = useDashboardStyles();
   const userId = useSelector(getUserId);
+  const orders = useSelector(getOrders);
   useEffect(() => loadOrders(userId), [loadOrders, userId]);
 
   return (
     <Container maxWidth="lg" className={classes.container}>
-      <OrderList orders={orders}></OrderList>
+      <OrderList
+        changeOrderStatus={() => undefined}
+        orders={orders}
+      ></OrderList>
     </Container>
   );
 };
 
 const mapStateToProps = (state: StoreState) => {
-  return {
-    orders: state.orderStore.orders,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch: StoreDispatch) => {
