@@ -4,56 +4,7 @@ import { OrderActionTypes, OrderState } from "./types";
 
 const initialState: OrderState = {
   isPostingOrder: false,
-  orders: [
-    {
-      id: 1,
-      city: "Kraków",
-      postalCode: "30-197",
-      street: "Balicka",
-      buildingNumber: "31",
-      dishes: [
-        { id: 1, name: "rosol", description: "super rosol", price: 13 },
-        { id: 1, name: "rosol", description: "super rosol", price: 13 },
-        { id: 2, name: "pizza", description: "super pizza", price: 13 },
-        { id: 2, name: "pizza", description: "super pizza", price: 13 },
-      ],
-      userId: 2,
-      price: 52,
-      status: "CREATED",
-    },
-    {
-      id: 2,
-      city: "Kraków",
-      postalCode: "30-197",
-      street: "Balicka",
-      buildingNumber: "31",
-      dishes: [
-        { id: 1, name: "rosol", description: "super rosol", price: 13 },
-        { id: 1, name: "rosol", description: "super rosol", price: 13 },
-        { id: 1, name: "rosol", description: "super rosol", price: 13 },
-        { id: 1, name: "rosol", description: "super rosol", price: 13 },
-      ],
-      userId: 2,
-      price: 52,
-      status: "DONE",
-    },
-    {
-      id: 3,
-      city: "Kraków",
-      postalCode: "30-197",
-      street: "Balicka",
-      buildingNumber: "31",
-      dishes: [
-        { id: 1, name: "rosol", description: "super rosol", price: 13 },
-        { id: 1, name: "rosol", description: "super rosol", price: 13 },
-        { id: 1, name: "rosol", description: "super rosol", price: 13 },
-        { id: 1, name: "rosol", description: "super rosol", price: 13 },
-      ],
-      userId: 2,
-      price: 52,
-      status: "DURING",
-    },
-  ],
+  orders: [],
 };
 
 export const getOrders = (state: StoreState) =>
