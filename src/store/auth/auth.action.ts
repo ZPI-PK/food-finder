@@ -18,10 +18,14 @@ export const authStart = (): AuthStartAction => {
   };
 };
 
-export const authSuccess = (accessToken: string): AuthSuccessAction => {
+export const authSuccess = (
+  accessToken: string,
+  isAdmin: boolean
+): AuthSuccessAction => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     accessToken: accessToken,
+    isAdmin,
   };
 };
 
@@ -49,7 +53,8 @@ export const auth = (authData: LoginRequest): any => (
       Cookies.set("accessToken", accessToken);
       Cookies.set("expirationDate", expirationDate);
 
-      dispatch(authSuccess(accessToken));
+      const isAdmin = authData.usernameOrEmail === "admin";
+      dispatch(authSuccess(accessToken, isAdmin));
       dispatch(
         checkAuthTimeout(expirationDate.getTime() - new Date().getTime())
       );
@@ -69,7 +74,7 @@ export const authCheck = (): any => (dispatch: StoreDispatch): any => {
 
   if (accessToken && expirationDate && new Date(expirationDate) > new Date()) {
     setBearerToken(accessToken);
-    dispatch(authSuccess(accessToken));
+    dispatch(authSuccess(accessToken, false));
     dispatch(
       checkAuthTimeout(
         new Date(expirationDate).getTime() - new Date().getTime()

@@ -13,7 +13,7 @@ const initialState: AuthState = {
   accessToken: null,
   error: null,
   authLoading: false,
-  isAdmin: true,
+  isAdmin: false,
 };
 
 export const getIsAdmin = (state: StoreState) => state.authStore.isAdmin;
@@ -35,6 +35,7 @@ const authSuccess = (
     accessToken: action.accessToken,
     error: null,
     authLoading: false,
+    isAdmin: action.isAdmin,
   };
 };
 
