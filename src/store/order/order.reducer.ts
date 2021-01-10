@@ -72,6 +72,13 @@ const reducer = (
       return { ...state, isPostingOrder: false };
     case actionTypes.GET_ORDERS_SUCCESS:
       return { ...state, orders: action.orders };
+    case actionTypes.ORDERS_UPDATED:
+      return {
+        ...state,
+        orders: state.orders
+          .filter((p) => p.id !== action.orders.id)
+          .concat(action.orders),
+      };
     default:
       return state;
   }

@@ -10,6 +10,7 @@ import {
   GetOrdersFailure,
   GetOrdersStart,
   GetOrdersSuccess,
+  OrdersUpdatedAction,
   PostOrderStartAction,
   PostOrderSuccessAction,
 } from "./types";
@@ -92,6 +93,11 @@ export const getOrdersUser = (userId: number): any => (
     });
 };
 
+const ordersUpdated = (orders: Order[]): OrdersUpdatedAction => ({
+  type: actionTypes.ORDERS_UPDATED,
+  orders: orders[0],
+});
+
 export const changeOrderStatus = (
   orderId: number,
   status: OrderStatus
@@ -101,7 +107,7 @@ export const changeOrderStatus = (
   return axios
     .get(`api/order/status?id=${orderId}&status=${status}`)
     .then((res: AxiosResponse<Order[]>) => {
-      dispatch(getOrdersSuccess(res.data));
+      dispatch(ordersUpdated(res.data));
     })
     .catch(() => {
       dispatch(getOrdersFailure());

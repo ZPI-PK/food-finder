@@ -31,10 +31,16 @@ export interface GetOrdersFailure {
   type: typeof actionTypes.GET_ORDERS_FAILURE;
 }
 
+export interface OrdersUpdatedAction {
+  type: typeof actionTypes.ORDERS_UPDATED;
+  orders: Order;
+}
+
 export type OrderActionTypes =
   | PostOrderStartAction
   | PostOrderSuccessAction
   | PostOrderFailureAction
   | GetOrdersFailure
   | GetOrdersStart
-  | GetOrdersSuccess;
+  | GetOrdersSuccess
+  | OrdersUpdatedAction;

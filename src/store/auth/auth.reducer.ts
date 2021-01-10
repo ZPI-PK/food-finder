@@ -67,7 +67,6 @@ const reducer = (state = initialState, action: AuthActionTypes): AuthState => {
       return authSuccess(state, action);
     case actionTypes.AUTH_FAILURE:
       return authFailure(state, action);
-
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
     default:
