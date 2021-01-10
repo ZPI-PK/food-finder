@@ -6,7 +6,7 @@ import Dish from "../../shared/types/dish/Dish";
 import { Order } from "../../shared/types/order/Order";
 import { StoreState, StoreDispatch } from "../../shared/types/store";
 import { addDishToCart } from "../../store";
-import { getOrders } from "../../store/order/order.action";
+import { getOrdersAdmin } from "../../store/order/order.action";
 import OrderList from "./OrderList";
 
 interface OrdersProps {
@@ -34,7 +34,7 @@ const mapStateToProps = (state: StoreState) => {
 const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
     addDishClicked: (dish: Dish) => dispatch(addDishToCart(dish)),
-    loadOrders: () => dispatch(getOrders()),
+    loadOrders: () => dispatch(getOrdersAdmin()),
   };
 };
 

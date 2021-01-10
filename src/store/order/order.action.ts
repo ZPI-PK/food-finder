@@ -64,11 +64,26 @@ export const getOrdersFailure = (): GetOrdersFailure => {
   };
 };
 
-export const getOrders = (): any => (dispatch: StoreDispatch): any => {
+export const getOrdersAdmin = (): any => (dispatch: StoreDispatch): any => {
   dispatch(getOrdersStart());
 
   return axios
     .get(`api/order/all`)
+    .then((res: AxiosResponse<Order[]>) => {
+      dispatch(getOrdersSuccess(res.data));
+    })
+    .catch(() => {
+      dispatch(getOrdersFailure());
+    });
+};
+
+export const getOrdersUser = (userId: number): any => (
+  dispatch: StoreDispatch
+): any => {
+  dispatch(getOrdersStart());
+
+  return axios
+    .get(`api/order/user/all?id=${userId}`)
     .then((res: AxiosResponse<Order[]>) => {
       dispatch(getOrdersSuccess(res.data));
     })
