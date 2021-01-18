@@ -7,10 +7,13 @@ import {
   CardActions,
   IconButton,
 } from "@material-ui/core";
+import { Edit } from "@material-ui/icons";
 import Add from "@material-ui/icons/Add";
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
 import useListStyles from "../../shared/styles/ListStyles";
 import Dish from "../../shared/types/dish/Dish";
+import { getIsAdmin } from "../../store/auth/auth.reducer";
 
 interface DishItemProps {
   dish: Dish;
@@ -19,6 +22,7 @@ interface DishItemProps {
 
 const DishItem: FC<DishItemProps> = ({ dish, addDishClicked }) => {
   const styles = useListStyles();
+  const isAdmin = useSelector(getIsAdmin);
   return (
     <ListItem key={dish.id}>
       <Card className={styles.listItem}>
@@ -31,7 +35,7 @@ const DishItem: FC<DishItemProps> = ({ dish, addDishClicked }) => {
         </CardContent>
         <CardActions>
           <IconButton onClick={() => addDishClicked(dish)}>
-            <Add></Add>
+            {isAdmin ? <Edit></Edit> : <Add></Add>}
           </IconButton>
         </CardActions>
       </Card>

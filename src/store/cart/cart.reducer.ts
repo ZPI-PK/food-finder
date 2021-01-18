@@ -10,6 +10,15 @@ const initialState: CartState = {
 export const getCartTotal = (state: StoreState) =>
   state.cartStore.dishes.reduce((total, dg) => total + dg.count * dg.price, 0);
 
+export const getDishes = (state: StoreState) =>
+  state.cartStore.dishes.flatMap(({ count, ...dish }) => {
+    let dishes: Dish[] = [];
+    for (let i = 0; i < count; i++) {
+      dishes.push({ ...dish });
+    }
+    return dishes;
+  });
+
 function addDish(state: CartState, dish: Dish) {
   const dishGroup = state.dishes.find((dg) => dg.id === dish.id);
   if (!dishGroup)
@@ -45,6 +54,8 @@ const reducer = (state = initialState, action: CartActionTypes): CartState => {
       return addDish(state, action.dish);
     case actionTypes.REMOVE_DISH_FROM_CART:
       return removeDish(state, action.dish);
+    case actionTypes.CLEAR_CART:
+      return { ...state, dishes: [] };
     default:
       return state;
   }

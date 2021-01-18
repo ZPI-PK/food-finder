@@ -16,4 +16,11 @@ export interface RemoveDishFromCartAction {
   dish: Dish;
 }
 
-export type CartActionTypes = AddDishToCartAction | RemoveDishFromCartAction;
+export interface ClearCartAction {
+  type: typeof actionTypes.CLEAR_CART;
+}
+
+export type CartActionTypes =
+  | AddDishToCartAction
+  | RemoveDishFromCartAction
+  | ClearCartAction;

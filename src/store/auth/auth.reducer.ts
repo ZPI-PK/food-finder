@@ -8,6 +8,7 @@ import {
   AuthState,
   AuthSuccessAction,
 } from "./types";
+import jwt_decode from "jwt-decode";
 
 const initialState: AuthState = {
   accessToken: null,
@@ -16,7 +17,11 @@ const initialState: AuthState = {
   isAdmin: false,
 };
 
-export const getIsAdmin = (state: StoreState) => state.authStore.isAdmin;
+export const getIsAdmin = (state: StoreState) => getUserId(state) === 1;
+export const getUserId = (state: StoreState) =>
+  state.authStore.accessToken != null
+    ? Number(jwt_decode<{ sub: string }>(state.authStore.accessToken).sub)
+    : 0;
 
 const authStart = (state: AuthState, action: AuthStartAction): AuthState => {
   return {
@@ -62,7 +67,6 @@ const reducer = (state = initialState, action: AuthActionTypes): AuthState => {
       return authSuccess(state, action);
     case actionTypes.AUTH_FAILURE:
       return authFailure(state, action);
-
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
     default:
